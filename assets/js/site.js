@@ -248,6 +248,18 @@
     });
   }
 
+  // ---------- more work: silent clips play only while on screen ----------
+  document.querySelectorAll("video[data-autoplay]").forEach((v) => {
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      v.controls = true;
+      return;
+    }
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) v.play().catch(() => {});
+      else v.pause();
+    }, { threshold: 0.4 }).observe(v);
+  });
+
   // ---------- eyes follow the cursor ----------
   const pupils = [];
   document.querySelectorAll(".bot").forEach((svg) => {

@@ -15,7 +15,8 @@ for (const [name, viewport] of [["desktop", { width: 1440, height: 900 }], ["mob
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   page.on("console", (m) => { if (m.type() === "error" && !/fonts\.g/.test(m.location().url || "")) errors.push(m.text()); });
-  await page.goto(url, { waitUntil: "networkidle" });
+  // "load", not "networkidle": video streams from python http.server (no Range support) never finish
+  await page.goto(url, { waitUntil: "load" });
   await page.waitForTimeout(1200);
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);
   const height = await page.evaluate(() => document.body.scrollHeight);

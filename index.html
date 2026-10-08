@@ -253,24 +253,55 @@
         <h2 id="work-title">עוד מהסטודיו.</h2>
         <p>Lumagica היא עבודה אחת מתוך ארבעה תחומים: סרטים, דמויות, מוזיקה ואתרים.</p>
       </div>
-      <dl class="work-list">
-        <div>
-          <dt>סרטים</dt>
-          <dd>קליפ ״לב״ לאושר כהן. פרסומת הקומיקס ComicsComy. שלוש השתתפויות בתחרות הסרטים Gen48. ״קיר המשאלות״ באתגר LTX.</dd>
-        </div>
-        <div>
-          <dt>דמויות ופוסטרים</dt>
-          <dd>Komi: פוסטרים וסרטונים אישיים לעשרות אנשים, כל אחד בדמות משלו.</dd>
-        </div>
-        <div>
-          <dt>מוזיקה</dt>
-          <dd>25 שירים ב־Suno מאז 2024, עם מילים ועטיפה לכל אחד, ואלבום שלום שלם.</dd>
-        </div>
-        <div>
-          <dt>אתרים וכלים</dt>
-          <dd>אתר בית בריל ומערכת התפעול שלו, אתרי נחיתה לדירות אירוח, ומחברת ההפקה הדיגיטלית של Lumagica.</dd>
-        </div>
-      </dl>
+      <div class="work-grid">
+        <section class="domain domain--films" aria-labelledby="films-title">
+          <h3 id="films-title">סרטים</h3>
+          <p>קליפ ״לב״ לאושר כהן. פרסומת הקומיקס ComicsComy. שלוש השתתפויות בתחרות הסרטים Gen48. ״קיר המשאלות״ באתגר LTX.</p>
+          <div class="films">
+            <figure class="work-media work-media--tall">
+              <div class="media-box">
+                <video src="assets/video/work/heart-osher.mp4" poster="assets/img/work/heart-osher-poster.jpg" muted loop playsinline preload="none" data-autoplay width="1080" height="1920" aria-label="קטע מהקליפ ״לב״: לב שקוף מתמלא ממתקים, צמר וזיקוקים"></video>
+              </div>
+              <figcaption><b>״לב״, אושר כהן.</b> קליפ שבו הלב מתחלף בכל שוט.</figcaption>
+            </figure>
+            <figure class="work-media">
+              <video src="assets/video/work/wishing-wall.mp4" poster="assets/img/work/wishing-wall-poster.jpg" muted loop playsinline preload="none" data-autoplay width="1280" height="720" aria-label="קטע מ״קיר המשאלות״: אישה מכניסה פתק מואר לכותל, והפתק הופך לשורת חיפוש"></video>
+              <figcaption><b>״קיר המשאלות״, אתגר LTX.</b> פתק בכותל שהופך לשאלה.</figcaption>
+            </figure>
+            <figure class="work-media">
+              <img src="assets/img/work/comicscomy-phone.jpg" alt="איור קומיקס: טלפון חוגה צהוב מצלצל על שולחן בסלון" loading="lazy" width="954" height="768">
+              <figcaption><b>ComicsComy.</b> פרסומת קומיקס ל־Comy, שנפתחת במשפט ״אז הטלפון צלצל״.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="domain" aria-labelledby="music-title">
+          <h3 id="music-title">מוזיקה</h3>
+          <p>25 שירים ב־Suno מאז 2024, עם מילים ועטיפה לכל אחד, ואלבום שלום שלם.</p>
+          <figure class="work-media work-media--album">
+            <div class="album-frame">
+              <img src="assets/img/work/peace-album-cover.jpg" alt="עטיפת השיר: נבט קטן צומח בין כיכרות לחם על שולחן עץ" loading="lazy" width="1024" height="1024">
+            </div>
+            <figcaption><b>Peace Album, ״The Table Without Flags״.</b> קטע של 30 שניות.</figcaption>
+            <audio src="assets/audio/work/peace-album.m4a" controls preload="none">קטע מהשיר The Table Without Flags</audio>
+          </figure>
+        </section>
+
+        <section class="domain" aria-labelledby="sites-title">
+          <h3 id="sites-title">אתרים וכלים</h3>
+          <p>אתר בית בריל ומערכת התפעול שלו, אתרי נחיתה לדירות אירוח, ומחברת ההפקה הדיגיטלית של Lumagica.</p>
+          <figure class="work-media">
+            <img src="assets/img/work/lumagica-journey.jpg" alt="פתיחת מחברת ההפקה של Lumagica: הכותרת ״הטיפה שהפכה לשדה״ מעל שדה טוליפים בלילה" loading="lazy" width="1600" height="1000">
+            <figcaption><b>מחברת ההפקה של Lumagica.</b> היומן שממנו נלקחו כל המספרים בעמוד הזה.</figcaption>
+          </figure>
+        </section>
+
+        <!-- Komi posters show real comedians: add media only after Brill confirms permission per person. -->
+        <section class="domain domain--text" aria-labelledby="chars-title">
+          <h3 id="chars-title">דמויות ופוסטרים</h3>
+          <p>Komi: פוסטרים וסרטונים אישיים לעשרות אנשים, כל אחד בדמות משלו.</p>
+        </section>
+      </div>
     </section>
 
     <!-- CONTACT -->
@@ -286,7 +317,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>Brill.ai, רמת גן. כל התמונות והסרטונים בעמוד נוצרו בפרויקט Lumagica תל אביב, ספטמבר 2026.</p>
+    <p>Brill.ai, רמת גן. התמונות והסרטונים בעמוד נוצרו בפרויקט Lumagica תל אביב, ספטמבר 2026, מלבד אלה שבמקטע ״עוד מהסטודיו״.</p>
   </footer>
 
   <div class="bot-tip" id="botTip" role="status" aria-live="polite"></div>

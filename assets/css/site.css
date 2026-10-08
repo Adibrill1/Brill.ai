@@ -600,18 +600,81 @@ button { font: inherit; color: inherit; }
 }
 .work-hero img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-radius: 28px; }
 .work-hero figcaption { font-size: 14px; color: var(--mist); margin-top: 14px; text-align: center; }
-.work-list {
-  max-width: 980px;
+.work-grid {
+  max-width: var(--wrap);
   margin: clamp(48px, 8vh, 80px) auto 0;
   padding-inline: var(--gutter);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 40px clamp(32px, 5vw, 72px);
+  gap: clamp(56px, 9vh, 96px) clamp(32px, 4vw, 56px);
 }
-.work-list div { display: grid; gap: 10px; padding-top: 22px; border-top: 1px solid var(--line); }
-.work-list dt { font-size: 22px; font-weight: 700; }
-.work-list dd { margin: 0; font-size: 17px; color: var(--mist); line-height: 1.6; }
-@media (max-width: 720px) { .work-list { grid-template-columns: 1fr; } .work-hero img { aspect-ratio: 16 / 10; border-radius: 20px; } }
+.domain { display: grid; gap: 10px; align-content: start; padding-top: 22px; border-top: 1px solid var(--line); }
+.domain--films, .domain--text { grid-column: 1 / -1; }
+.domain h3 { font-size: 22px; font-weight: 700; }
+.domain > p { font-size: 17px; color: var(--mist); line-height: 1.6; max-width: 40em; }
+
+/* the vertical clip spans both rows, so it matches the two landscape pieces beside it */
+.films {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.62fr) minmax(0, 1fr);
+  gap: clamp(20px, 2.4vw, 32px);
+}
+.films .work-media--tall { grid-row: span 2; }
+
+.work-media { display: grid; gap: 12px; align-content: start; }
+.domain > .work-media { margin-top: 18px; }
+.work-media > img, .work-media > video, .media-box, .album-frame {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--panel);
+}
+.domain:not(.domain--films) .work-media > img { aspect-ratio: 16 / 10; }
+.work-media--tall { grid-template-rows: minmax(0, 1fr) auto; align-content: stretch; }
+.media-box { position: relative; aspect-ratio: auto; min-height: 240px; }
+.media-box video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.work-media figcaption { font-size: 15px; color: var(--mist); line-height: 1.5; }
+.work-media figcaption b { color: var(--ink); font-weight: 600; }
+
+/* square cover on a blurred bed of itself, so it lines up with the 16:10 pieces */
+.album-frame {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+.album-frame::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  z-index: -1;
+  background: url("../img/work/peace-album-cover.jpg") center / cover;
+  filter: blur(36px) brightness(0.55);
+}
+.album-frame img {
+  position: absolute;
+  top: 11%;
+  left: 50%;
+  height: 78%;
+  width: auto;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 10px;
+}
+.work-media audio { width: 100%; height: 40px; }
+
+@media (max-width: 720px) {
+  .work-grid { grid-template-columns: 1fr; }
+  .films { grid-template-columns: 1fr; }
+  .films .work-media--tall { grid-row: auto; }
+  .media-box { aspect-ratio: 4 / 5; min-height: 0; }
+  .work-hero img { aspect-ratio: 16 / 10; border-radius: 20px; }
+}
 
 /* ---------- contact ---------- */
 .contact {
