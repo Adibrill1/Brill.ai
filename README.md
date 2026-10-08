@@ -1,5 +1,7 @@
 # Brill.ai
 
+> להמשך עבודה עם סוכן (Codex וכו'): `AGENTS.md` הם הכללים, `docs/HANDOFF.md` הוא המצב הנוכחי.
+
 האתר של Brill.ai: עבודות שנוצרו עם AI. עמוד הבית בנוי סביב הפרויקט **Lumagica תל אביב** ("מאחורי האור"), ומראה את שמונה תחנות ההפקה של הסרט ואת הצוות, אנשים ומודלים, שעבד בכל תחנה.
 
 ## מבנה
@@ -11,6 +13,9 @@ assets/js/site.js          התנהגות: הרובוטים, גלילת התחנ
 assets/img/lumagica/       תמונות מהפרויקט
 assets/video/              טיזר מאחורי הקלעים (30 שניות, אנכי)
 docs/ai-assets-inventory.md  מלאי כל עבודות ה-AI והמיקום שלהן במחשב
+docs/HANDOFF.md            מצב הפרויקט ומה הלאה
+scripts/prepare-media.sh   הכנת תמונות, קליפים ואודיו לאתר
+scripts/check.mjs          בדיקת תצוגה לפני PR
 ```
 
 אין שלב build ואין תלויות. זה אתר סטטי: HTML, CSS ו-JavaScript.
