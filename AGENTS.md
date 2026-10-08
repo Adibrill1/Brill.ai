@@ -63,7 +63,7 @@ node scripts/check.mjs        # עמוד הבית ו־work.html: צילומי מ
    - וידאו: לחתוך לקליפים של 6 עד 10 שניות ולכווץ (`ffmpeg -crf 28`).
    - לא להכניס לריפו קבצים כבדים מ־10MB.
 2. ~~**עמוד עבודות מלא.**~~ נעשה: `work.html`, עם גלריה לכל תחום. בתחום הדמויות חסרים הפוסטרים של Komi עד שיהיה אישור מהמצולמים.
-3. **לבדוק את התיקייה** `Ai Vibe coding/Brill Studio`. היא לא נסקרה עד עכשיו, ויש בה `brill ai studio` ו־`Video Pipeline Opus 5.5`.
+3. ~~**לבדוק את התיקייה** `Ai Vibe coding/Brill Studio`~~: נסקרה. הממצאים בקובץ `docs/brill-studio-review.md`. לא להכניס ממנה חומר לאתר לפני שבריל עונה על השאלות הפתוחות שם.
 4. **לאשר עם בריל** את השיוך של הכלים לכל תחנה (`data-who`) ואת הטקסטים לפני מיזוג ל־`main`.
 5. אחרי המיזוג, להפעיל את GitHub Pages: Settings → Pages → Source: GitHub Actions.
 

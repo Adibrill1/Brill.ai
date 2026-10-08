@@ -65,7 +65,7 @@ git checkout -t origin/lumagica-homepage
    לבחור את התוצרים הסופיים ולא קבצי ביניים: קבצים בשם `Done`, `final` או קבצי `.mp4` מעורכים, ולא גנרציות גולמיות.
 2. ~~**`work.html`**~~: נעשה. כדי להוסיף עבודה: `prepare-media.sh` לתיקייה `work`, `music` או `sites`, ואז `<figure class="piece">` או `<li class="track">` במקטע המתאים. הנגן נבנה אוטומטית ב־`site.js`.
    - לבדוק עם בריל: בעמוד הבית כתוב "25 שירים ב־Suno מאז 2024", אבל בארכיון יש 25 תיקיות עם מאות קבצי שירים. ב־`work.html` המספר הושמט.
-3. **סקירה של `Ai Vibe coding/Brill Studio`**: לדווח לבריל מה יש שם לפני שמכניסים משהו לאתר.
+3. ~~**סקירה של `Ai Vibe coding/Brill Studio`**~~: נעשתה, והממצאים ב־`docs/brill-studio-review.md`. ההמלצה היא להוסיף ל־`work.html` תחום "מושן". השאלות הפתוחות לבריל: ClaUI, The Harness, הקרדיט ל־Thinking Orbs, ו־"Adi" מול "Brill".
 4. **לעבור עם בריל** על השיוך של הכלים לתחנות ועל הטקסטים, ואז למזג את PR #1 ולהפעיל את Pages.
 
 ## נקודות רגישות
