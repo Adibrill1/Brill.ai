@@ -265,6 +265,11 @@
     }, { threshold: 0.4 }).observe(v);
   });
 
+  // ---------- one sound at a time: films with sound and music tracks silence each other ----------
+  const SOUND = "brill:sound";
+  const claimSound = (el) => document.dispatchEvent(new CustomEvent(SOUND, { detail: el }));
+  const onOtherSound = (el, stop) => document.addEventListener(SOUND, (e) => { if (e.detail !== el) stop(); });
+
   // ---------- play the full film with sound in place of its silent loop ----------
   // Without JS the link simply opens the film file.
   document.querySelectorAll("a[data-film]").forEach((link) => {
@@ -295,8 +300,10 @@
       v.loop = false;
       v.muted = false;
       v.play().catch(() => {});
+      claimSound(v);
     });
     v.addEventListener("ended", () => { if (btn.getAttribute("aria-pressed") === "true") toLoop(); });
+    onOtherSound(v, () => { if (btn.getAttribute("aria-pressed") === "true") toLoop(); });
   });
 
   // ---------- work page: one play button per cover, one track at a time ----------
@@ -325,13 +332,13 @@
     label();
     btn.addEventListener("click", () => {
       if (audio.paused) {
-        tracks.forEach((other) => { const a = other.querySelector("audio"); if (a !== audio) a?.pause(); });
         audio.play().catch(() => {});
       } else {
         audio.pause();
       }
     });
-    audio.addEventListener("play", () => { li.classList.add("is-playing", "has-played"); label(); });
+    audio.addEventListener("play", () => { li.classList.add("is-playing", "has-played"); label(); claimSound(audio); });
+    onOtherSound(audio, () => audio.pause());
     audio.addEventListener("pause", () => { li.classList.remove("is-playing"); label(); });
     audio.addEventListener("ended", () => { audio.currentTime = 0; });
     audio.addEventListener("timeupdate", () => {

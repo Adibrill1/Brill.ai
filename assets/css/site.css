@@ -749,7 +749,7 @@ button { font: inherit; color: inherit; }
 .piece--text { padding-top: 22px; border-top: 1px solid var(--line); }
 .piece--text h3 { font-size: 22px; font-weight: 700; text-align: right; }
 .piece--text p { font-size: 17px; color: var(--mist); line-height: 1.6; }
-.piece--text .film-sound { padding-inline: 0; margin-top: 4px; }
+.piece .film-sound { padding-inline: 0; margin-top: 4px; }
 @media (prefers-reduced-motion: no-preference) {
   .piece-link img { transition: transform 0.8s var(--ease); }
   .piece-link:hover img { transform: scale(1.025); }
