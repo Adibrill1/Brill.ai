@@ -265,6 +265,40 @@
     }, { threshold: 0.4 }).observe(v);
   });
 
+  // ---------- play the full film with sound in place of its silent loop ----------
+  // Without JS the link simply opens the film file.
+  document.querySelectorAll("a[data-film]").forEach((link) => {
+    const v = document.getElementById(link.dataset.for);
+    if (!v) return;
+    const loopSrc = v.getAttribute("src");
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = link.className;
+    btn.innerHTML = link.innerHTML;
+    btn.setAttribute("aria-pressed", "false");
+    link.replaceWith(btn);
+    const label = btn.querySelector("span");
+    const idleText = label.textContent;
+    const toLoop = () => {
+      btn.setAttribute("aria-pressed", "false");
+      label.textContent = idleText;
+      v.src = loopSrc;
+      v.muted = true;
+      v.loop = true;
+      if (!reduceMotion) v.play().catch(() => {});
+    };
+    btn.addEventListener("click", () => {
+      if (btn.getAttribute("aria-pressed") === "true") { toLoop(); return; }
+      btn.setAttribute("aria-pressed", "true");
+      label.textContent = "השתיקו וחזרו ללולאה";
+      v.src = link.dataset.film;
+      v.loop = false;
+      v.muted = false;
+      v.play().catch(() => {});
+    });
+    v.addEventListener("ended", () => { if (btn.getAttribute("aria-pressed") === "true") toLoop(); });
+  });
+
   // ---------- work page: one play button per cover, one track at a time ----------
   const tracks = [...document.querySelectorAll(".track")];
   const ICONS = `

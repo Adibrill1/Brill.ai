@@ -48,6 +48,7 @@ git checkout -t origin/lumagica-homepage
   scripts/prepare-media.sh image "<מקור>" komi-ben
   scripts/prepare-media.sh clip  "<מקור>" heart-osher 12 8
   scripts/prepare-media.sh audio "<מקור>" peace-album 30 30
+  scripts/prepare-media.sh film  "<מקור>" connecting-the-dots-full 0 "" motion   # סרט עם קול, לכפתור "צפו עם קול"
   ```
 - `scripts/check.mjs`: מצלם את עמוד הבית ואת `work.html` במחשב ובטלפון, ונכשל אם יש גלילה אופקית או שגיאה בקונסול.
   ```bash

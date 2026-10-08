@@ -9,6 +9,8 @@
 #       plus a poster frame -> assets/img/<folder>/<name>-poster.jpg
 #   scripts/prepare-media.sh audio <source> <name> <start-seconds> [length=30] [folder]
 #       Short AAC excerpt -> assets/audio/<folder>/<name>.m4a
+#   scripts/prepare-media.sh film  <source> <name> [start=0] [length=whole] [folder]
+#       Video with its sound, for play-with-sound buttons -> assets/video/<folder>/<name>.mp4
 #
 # Paths with spaces or Hebrew must be quoted. Example:
 #   scripts/prepare-media.sh clip "/Users/adibrill/Desktop/Adi/Ai Work/Heart - Osher cohen/osher.mp4" heart-osher 12 8 work
@@ -16,7 +18,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 kind="${1:-}"; src="${2:-}"; name="${3:-}"
-[[ -z "$kind" || -z "$src" || -z "$name" ]] && { sed -n '2,15p' "$0"; exit 1; }
+[[ -z "$kind" || -z "$src" || -z "$name" ]] && { sed -n '2,17p' "$0"; exit 1; }
 [[ -f "$src" ]] || { echo "Source not found: $src" >&2; exit 1; }
 
 check_size() {
@@ -48,5 +50,12 @@ case "$kind" in
     ffmpeg -v error -y -ss "$start" -t "$len" -i "$src" -vn -c:a aac -b:a 128k \
       -af "afade=t=in:d=1,afade=t=out:st=$((len-2)):d=2" -movflags +faststart "$out"
     check_size "$out" ;;
-  *) echo "Unknown kind: $kind (image | clip | audio)" >&2; exit 1 ;;
+  film)
+    start="${4:-0}"; len="${5:-}"; folder="${6:-work}"
+    out="assets/video/$folder/$name.mp4"; mkdir -p "$(dirname "$out")"
+    ffmpeg -v error -y -ss "$start" ${len:+-t "$len"} -i "$src" \
+      -vf "scale='min(1280,iw)':-2" -c:v libx264 -crf 28 -preset slow -pix_fmt yuv420p \
+      -c:a aac -b:a 128k -movflags +faststart "$out"
+    check_size "$out" ;;
+  *) echo "Unknown kind: $kind (image | clip | audio | film)" >&2; exit 1 ;;
 esac
