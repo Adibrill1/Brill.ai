@@ -12,7 +12,8 @@
 | עמוד הבית | גמור ונבדק ברוחב 1440 וברוחב 390, בלי גלילה אופקית ובלי שגיאות |
 | פרסום | ה־workflow ל־GitHub Pages מוכן. צריך להפעיל אותו אחרי המיזוג |
 | "עוד עבודות" | יש מדיה: קליפים של "לב" ו"קיר המשאלות", פריים מ־ComicsComy, עטיפה וקטע מ־Peace Album, ומחברת ההפקה. **Komi עדיין בלי תמונה**: מחכה לאישור של בריל על המצולמים |
-| חסר | תמונה ל־Komi אחרי אישור, ועמוד `work.html` |
+| `work.html` | גמור ונבדק: 10 סרטים, לומה, 8 שירים עם נגן, 3 אתרים. מקושר מה־nav ומ"עוד עבודות" |
+| חסר | פוסטרים של Komi אחרי אישור |
 
 ## החלטות שכבר התקבלו (לא לפתוח מחדש בלי בריל)
 
@@ -38,7 +39,7 @@ git checkout -t origin/lumagica-homepage
 
 כלים שנדרשים במחשב:
 - `ffmpeg`: `brew install ffmpeg`. משמש את `scripts/prepare-media.sh`.
-- Node ו־Playwright, לבדיקה בלבד: `npm i -g playwright && npx playwright install chromium`. משמשים את `scripts/check.mjs`.
+- Node ו־Playwright, לבדיקה בלבד: `npm i --no-save --no-package-lock playwright && npx playwright install chromium` מתוך תיקיית הריפו (`node_modules` ב־`.gitignore`). התקנה גלובלית לא עובדת, כי `import` של ESM לא מוצא מודולים גלובליים. משמשים את `scripts/check.mjs`.
 
 ## כלי עזר בריפו
 
@@ -48,7 +49,7 @@ git checkout -t origin/lumagica-homepage
   scripts/prepare-media.sh clip  "<מקור>" heart-osher 12 8
   scripts/prepare-media.sh audio "<מקור>" peace-album 30 30
   ```
-- `scripts/check.mjs`: מצלם את העמוד במחשב ובטלפון, ונכשל אם יש גלילה אופקית או שגיאה בקונסול.
+- `scripts/check.mjs`: מצלם את עמוד הבית ואת `work.html` במחשב ובטלפון, ונכשל אם יש גלילה אופקית או שגיאה בקונסול.
   ```bash
   python3 -m http.server 8000 & node scripts/check.mjs
   ```
@@ -62,7 +63,8 @@ git checkout -t origin/lumagica-homepage
    - **אתרים**: צילום מסך של מחברת ההפקה של Lumagica.
 
    לבחור את התוצרים הסופיים ולא קבצי ביניים: קבצים בשם `Done`, `final` או קבצי `.mp4` מעורכים, ולא גנרציות גולמיות.
-2. **`work.html`**: גלריה מלאה באותה שפה עיצובית, עם קישור מה־nav.
+2. ~~**`work.html`**~~: נעשה. כדי להוסיף עבודה: `prepare-media.sh` לתיקייה `work`, `music` או `sites`, ואז `<figure class="piece">` או `<li class="track">` במקטע המתאים. הנגן נבנה אוטומטית ב־`site.js`.
+   - לבדוק עם בריל: בעמוד הבית כתוב "25 שירים ב־Suno מאז 2024", אבל בארכיון יש 25 תיקיות עם מאות קבצי שירים. ב־`work.html` המספר הושמט.
 3. **סקירה של `Ai Vibe coding/Brill Studio`**: לדווח לבריל מה יש שם לפני שמכניסים משהו לאתר.
 4. **לעבור עם בריל** על השיוך של הכלים לתחנות ועל הטקסטים, ואז למזג את PR #1 ולהפעיל את Pages.
 

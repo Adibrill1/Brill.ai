@@ -81,12 +81,16 @@
     s.appendChild(row);
   });
 
-  stopsEl.innerHTML = steps
-    .map((s, i) => `<li><span class="dot"></span><span class="lbl">${i + 1}</span></li>`)
-    .join("");
-  const stops = [...stopsEl.children];
+  // the rail exists only on the homepage
+  const hasRail = Boolean(stopsEl && botsEl);
+  if (hasRail) {
+    stopsEl.innerHTML = steps
+      .map((s, i) => `<li><span class="dot"></span><span class="lbl">${i + 1}</span></li>`)
+      .join("");
+  }
+  const stops = hasRail ? [...stopsEl.children] : [];
 
-  const railBots = ORDER.map((id) => {
+  const railBots = (hasRail ? ORDER : []).map((id) => {
     const el = document.createElement("div");
     el.className = "rbot is-idle";
     el.style.setProperty("--c", color(id));
@@ -104,6 +108,7 @@
   let stopX = [];
   let railW = 0;
   function measureRail() {
+    if (!hasRail) return;
     const r = botsEl.getBoundingClientRect();
     railW = r.width;
     stopX = stops.map((li) => {
@@ -258,6 +263,47 @@
       if (e.isIntersecting) v.play().catch(() => {});
       else v.pause();
     }, { threshold: 0.4 }).observe(v);
+  });
+
+  // ---------- work page: one play button per cover, one track at a time ----------
+  const tracks = [...document.querySelectorAll(".track")];
+  const ICONS = `
+    <svg class="i-play" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.2v11.6a.8.8 0 0 0 1.2.7l9.3-5.8a.8.8 0 0 0 0-1.4L7.2 3.5A.8.8 0 0 0 6 4.2z"/></svg>
+    <svg class="i-pause" viewBox="0 0 20 20" aria-hidden="true"><rect x="5" y="4" width="3.4" height="12" rx="1"/><rect x="11.6" y="4" width="3.4" height="12" rx="1"/></svg>`;
+  tracks.forEach((li) => {
+    const audio = li.querySelector("audio");
+    const img = li.querySelector("img");
+    if (!audio || !img) return;
+    const title = li.querySelector(".track-title")?.textContent.trim() || "";
+    const cover = document.createElement("div");
+    cover.className = "track-cover";
+    img.replaceWith(cover);
+    cover.appendChild(img);
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "track-play";
+    btn.innerHTML = ICONS;
+    const bar = document.createElement("span");
+    bar.className = "track-bar";
+    bar.innerHTML = "<i></i>";
+    cover.append(btn, bar);
+    const label = () => btn.setAttribute("aria-label", `${audio.paused ? "נגנו" : "עצרו"}: ${title}`);
+    label();
+    btn.addEventListener("click", () => {
+      if (audio.paused) {
+        tracks.forEach((other) => { const a = other.querySelector("audio"); if (a !== audio) a?.pause(); });
+        audio.play().catch(() => {});
+      } else {
+        audio.pause();
+      }
+    });
+    audio.addEventListener("play", () => { li.classList.add("is-playing", "has-played"); label(); });
+    audio.addEventListener("pause", () => { li.classList.remove("is-playing"); label(); });
+    audio.addEventListener("ended", () => { audio.currentTime = 0; });
+    audio.addEventListener("timeupdate", () => {
+      if (audio.duration) bar.style.setProperty("--p", `${(audio.currentTime / audio.duration) * 100}%`);
+    });
+    li.classList.add("is-enhanced");
   });
 
   // ---------- eyes follow the cursor ----------
